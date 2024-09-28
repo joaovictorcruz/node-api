@@ -1,5 +1,5 @@
-const express = require("express")
-const server = express()
+const express = require("express")//para usar o express
+const server = express()// para criar um servidor
 const copadobrasil = require("./src/times.json")
 
 server.get("/", (req, res) =>{
