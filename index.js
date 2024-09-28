@@ -1,5 +1,6 @@
 const express = require("express")
 const server = express()
+const copadobrasil = require("./src/times.json")
 
 server.get("/", (req, res) =>{
     return res.json({mensagem:"salve"})
@@ -10,7 +11,7 @@ server.get("/corinthians", (req, res) => {
 })
 
 server.get("/copadobrasil", (req, res) => {
-    return res.json({campeão:"corinthians"})
+    return res.json(copadobrasil)
 })
 
 server.listen(1910, () => {
