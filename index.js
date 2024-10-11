@@ -18,6 +18,10 @@ server.get("/materias", (req, res) =>{
     return res.json(materias)
 })
 
+server.get("/login/:email/:senha", (req, res) => {
+    return res.json(req.params);
+})
+
 server.listen(1910, () => {
     console.log("funcionando")
 })
