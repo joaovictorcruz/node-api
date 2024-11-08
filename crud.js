@@ -1,19 +1,19 @@
-async function carregarAlunos() {
+async function carregarPlanejamento() {
     
-    const resposta = await fetch("http://localhost:3031/mostrar"); 
-    const alunos = await resposta.json(); 
+    const resposta = await fetch("http://localhost:1910/mostrar"); 
+    const planejamentos = await resposta.json(); 
 
 
-    const container = document.getElementById("alunos-container");
+    const container = document.getElementById("site-container");
     container.innerHTML = ""; 
 
-    alunos.forEach((aluno) => {
-      const alunoDiv = document.createElement("div");
-      alunoDiv.innerHTML = `<p>Nome: ${aluno.nome}, Idade: ${aluno.idade}</p>`;
-      container.appendChild(alunoDiv);
+    planejamentos.forEach((planejamento) => {
+      const estudosDiv = document.createElement("div");
+      alunoDiv.innerHTML = `<p>Matéria: ${planejamento.nome}, Idade: ${aluno.idade}</p>`;
+      container.appendChild(estudosDiv);
     });
  
 }
 
-// Carrega os alunos ao abrir a página
+// Carrega os planejamentos ao abrir a página
 window.onload = carregarAlunos;

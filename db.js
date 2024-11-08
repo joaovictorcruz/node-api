@@ -75,3 +75,13 @@ con.authenticate().then(function(){
     console.log("Erro ao conectar com o banco de dados" + err);
 })
 
+
+// exportando entidades para CRUD
+
+module.exports = {
+    Usuario,
+    PlanoEstudo,
+    Tarefa,
+    Relatorio,
+    conexaoBanco,
+};

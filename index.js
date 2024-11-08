@@ -1,12 +1,9 @@
 const express = require("express");
-const rotas = express();
+const rotas = express(); 
+const banco = require("./db.js")
 
-const Sequelize = require("sequelize"); 
-
-const con = new Sequelize("DiarioBordo", "root", "",{
-    host: "localhost",
-    dialect: "mysql",
-});
+//Manipulação do BD
+const Usuario = banco.Usuario;
 
 const cors = require("cors"); // Importa o CORS
 // Habilita o CORS
@@ -21,7 +18,7 @@ rotas.get("/cadastro/:nome/:email/:senha", async function(req, res){
     const {nome,email,senha} = req.params; //Guarda os parametros em variaveis
 
     const novoUsuario = await Usuario.create({nome,email,senha});// insert
-
+x
     res.json({
         resposta: "Usuário cadastrado com sucesso", 
         usuario: novoUsuario
