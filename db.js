@@ -17,7 +17,6 @@ const Usuario = conexaoBanco.define("usuarios",{
     }
 })
 
-
 const PlanoEstudo = conexaoBanco.define("planoestudo",{
     plano_titulo: {
         type: Sequelize.STRING,
@@ -62,14 +61,17 @@ const Relatorio = conexaoBanco.define("relatorio", {
   }
 })
 
+/*
 Usuario.sync({ force: true});
 PlanoEstudo.sync({ force: true});
 Tarefa.sync({ force: true});
 Relatorio.sync({ force: true});
+*/
 
-conexaoBanco.authenticate().then(function(){
+con.authenticate().then(function(){
     console.log("conexão realizada com sucesso");
 
 }).catch(function(err){
     console.log("Erro ao conectar com o banco de dados" + err);
 })
+
