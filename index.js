@@ -18,7 +18,7 @@ rotas.get("/cadastro/:nome/:email/:senha", async function(req, res){
     const {nome,email,senha} = req.params; //Guarda os parametros em variaveis
 
     const novoUsuario = await Usuario.create({nome,email,senha});// insert
-x
+    
     res.json({
         resposta: "Usuário cadastrado com sucesso", 
         usuario: novoUsuario

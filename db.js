@@ -68,7 +68,7 @@ Tarefa.sync({ force: true});
 Relatorio.sync({ force: true});
 */
 
-con.authenticate().then(function(){
+conexaoBanco.authenticate().then(function(){
     console.log("conexão realizada com sucesso");
 
 }).catch(function(err){
