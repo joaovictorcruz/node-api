@@ -1,4 +1,4 @@
-async function carregarPlanejamento() {
+async function carregarUsuario() {
     
     const resposta = await fetch("http://localhost:1910/exibir"); 
     const Usuarios = await resposta.json(); 
@@ -16,4 +16,4 @@ async function carregarPlanejamento() {
 }
 
 // Carrega os planejamentos ao abrir a página
-window.onload = carregarPlanejamento;
+window.onload = carregarUsuario;
