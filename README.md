@@ -15,7 +15,6 @@
 - MySQL para banco de dados
   
 ### Pacotes necessários para rodar o projeto
-    pip install flask
     npm install express
     npm install nodemon
     npm install --save sequelize
