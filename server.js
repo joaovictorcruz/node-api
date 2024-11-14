@@ -1,10 +1,9 @@
-// index.js
 const express = require("express");
 const cors = require("cors");
 const rotas = express();
-const { Usuario } = require("./db")
+const { Usuario } = require("./back-end/db")
 // Importar as rotas
-const authRoutes = require("./routes/authRoutes");
+const authRoutes = require("./back-end/routes/authRoutes");
 
 rotas.use(cors());
 rotas.use(express.json()); // Para parsear JSON

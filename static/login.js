@@ -3,6 +3,7 @@ document.querySelector(".form").addEventListener("submit", function(event) {
 
     const email = document.getElementById("email").value;
     const senha = document.getElementById("password").value;
+    const errorMessage = document.getElementById("loginError");
 
     fetch("http://localhost:1910/api/auth/login", {
         method: "POST",
@@ -15,14 +16,13 @@ document.querySelector(".form").addEventListener("submit", function(event) {
     .then(data => {
         if (data.token) {
             localStorage.setItem("token", data.token);
-            window.location.href = "../templates/home.html"; // Redireciona para o tela inicial
+            window.location.href = "../templates/home.html";
         } else {
-            alert(data.erro || "Erro desconhecido");
+            errorMessage.textContent = data.erro || "Senha incorreta, tente novamente.";
         }
     })
     .catch(error => {
         console.error("Erro ao fazer login:", error);
-        alert("Erro ao fazer login");
+        errorMessage.textContent = "Erro ao fazer login. Tente novamente mais tarde.";
     });
 });
-
