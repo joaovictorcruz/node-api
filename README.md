@@ -1,4 +1,4 @@
-# Pacotes necessários para rodar o projeto
+# Site de Planejamento de Estudos
 
 1. Clonar o Repositório
 
@@ -12,6 +12,7 @@
 - Cors para melhor segurança e manipulação de requisições
 - bcrypt@ para utilizar senhas criptografadas
 - jsonwebtoken para autenticação
+- MySQL para banco de dados
   
 ### Pacotes necessários para rodar o projeto
     pip install flask
