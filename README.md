@@ -7,7 +7,7 @@
 
 2. Pacotes utilizados para criação do projeto
 - Node.js com Express para o back-end
-- Nodemon para melhor utilização do servidos
+- Nodemon para melhor utilização do servidor
 - Sequelize e Mysql2 para manipulção no banco de dados
 - Cors para melhor segurança e manipulação de requisições
 - bcrypt@ para utilizar senhas criptografadas
