@@ -1,5 +1,5 @@
-// controllers/authController.js
-const { Usuario } = require("../models");
+const { Usuario, PlanoEstudo, Tarefa, Relatorio } = require("../db");  // Importando diretamente de db.js
+
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 

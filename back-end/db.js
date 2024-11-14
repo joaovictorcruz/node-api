@@ -1,4 +1,3 @@
-// db.js
 const Sequelize = require("sequelize");
 
 const conexaoBanco = new Sequelize("PlanejamentoEstudo", "root", "", {
@@ -80,6 +79,7 @@ const syncDatabase = async () => {
         console.error("Erro ao sincronizar as tabelas:", err);
     }
 };
+
 
 syncDatabase();
 
