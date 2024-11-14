@@ -15,7 +15,7 @@ document.querySelector(".form").addEventListener("submit", function(event) {
     .then(data => {
         if (data.token) {
             localStorage.setItem("token", data.token);
-            window.location.href = "/dashboard.html"; // Redireciona para o dashboard
+            window.location.href = "../templates/home.html"; // Redireciona para o tela inicial
         } else {
             alert(data.erro || "Erro desconhecido");
         }
