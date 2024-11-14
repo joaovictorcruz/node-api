@@ -1,34 +1,23 @@
+// index.js
 const express = require("express");
-const rotas = express(); 
-const banco = require("./db.js")
+const cors = require("cors");
+const app = express();
 
-//Manipulação do BD
-const Usuario = banco.Usuario;
+// Importar as rotas
+const authRoutes = require("./routes/authRoutes");
 
-const cors = require("cors"); // Importa o CORS
-// Habilita o CORS
-rotas.use(cors());
-rotas.use(express.json());
+app.use(cors());
+app.use(express.json()); // Para parsear JSON
 
-rotas.get("/", function(req, res){
-    res.send("Rota Principal");
+// Definindo a rota principal
+app.get("/", (req, res) => {
+    res.send("API de Planejamento de Estudo");
 });
 
-rotas.post("/cadastro", async function(req, res){
-    const { nome, email, senha } = req.body;
-    const novoUsuario = await Usuario.create({ nome, email, senha });
-    
-    res.json({
-        resposta: "Usuário cadastrado com sucesso",
-        usuario: novoUsuario
-    });
-});
+// Usando as rotas
+app.use("/api/auth", authRoutes);
 
-rotas.get("/exibir", async function (req, res) {
-    const usuarios = await Usuario.findAll(); // Busca todos os registros
-    res.json(usuarios); // Retorna os registros em formato JSON
-  });
-
-rotas.listen(1910, function () {
+// Iniciando o servidor
+app.listen(1910, () => {
     console.log("Server is running on port 1910");
-  });
+});
