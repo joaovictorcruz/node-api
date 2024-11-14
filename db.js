@@ -1,23 +1,29 @@
-const Sequelize = require("sequelize")
+// db.js
+const Sequelize = require("sequelize");
 
-const  conexaoBanco = new Sequelize("PlanejamentoEstudo", "root", "", {
+const conexaoBanco = new Sequelize("PlanejamentoEstudo", "root", "", {
     host: "localhost",
     dialect: "mysql",
+    logging: false, // Desabilita logs do SQL no console
 });
 
-const Usuario = conexaoBanco.define("usuarios",{
-    nome:{
+const Usuario = conexaoBanco.define("usuarios", {
+    nome: {
         type: Sequelize.STRING,
     },
-    email:{
+    email: {
+        type: Sequelize.STRING,
+        unique: true,  // Garantir que o e-mail seja único
+    },
+    senha: {
         type: Sequelize.STRING,
     },
-    senha:{
-        type: Sequelize.STRING,
+    dataNasc: {
+        type: Sequelize.DATE,
     }
-})
+});
 
-const PlanoEstudo = conexaoBanco.define("planoestudo",{
+const PlanoEstudo = conexaoBanco.define("planoestudo", {
     plano_titulo: {
         type: Sequelize.STRING,
     },
@@ -30,17 +36,16 @@ const PlanoEstudo = conexaoBanco.define("planoestudo",{
     DataFim: {
         type: Sequelize.DATE,
     }
-})
+});
 
-
-const Tarefa = conexaoBanco.define("tarefa",{
+const Tarefa = conexaoBanco.define("tarefa", {
     tarefa_titulo: {
         type: Sequelize.STRING,
     },
     desc_conteudo: {
         type: Sequelize.STRING,
     },
-    data_vencimento:{
+    data_vencimento: {
         type: Sequelize.DATE,
     },
     horario: {
@@ -52,31 +57,31 @@ const Tarefa = conexaoBanco.define("tarefa",{
     data_conclusao: {
         type: Sequelize.DATE,
     }
-})
+});
 
 const Relatorio = conexaoBanco.define("relatorio", {
-  data_relatorio: {
-    type: Sequelize.DATE,
-    tempo_gasto: Sequelize.INTEGER,
-  }
-})
+    data_relatorio: {
+        type: Sequelize.DATE,
+    },
+    tempo_gasto: {
+        type: Sequelize.INTEGER,
+    }
+});
 
-/*
-Usuario.sync({ force: true});
-PlanoEstudo.sync({ force: true});
-Tarefa.sync({ force: true});
-Relatorio.sync({ force: true});
-*/
+// Sincronizando os modelos com o banco de dados
+const syncDatabase = async () => {
+    try {
+        await Usuario.sync({ alter: true });
+        await PlanoEstudo.sync({ alter: true });
+        await Tarefa.sync({ alter: true });
+        await Relatorio.sync({ alter: true });
+        console.log("Tabelas sincronizadas com sucesso");
+    } catch (err) {
+        console.error("Erro ao sincronizar as tabelas:", err);
+    }
+};
 
-conexaoBanco.authenticate().then(function(){
-    console.log("conexão realizada com sucesso");
-
-}).catch(function(err){
-    console.log("Erro ao conectar com o banco de dados" + err);
-})
-
-
-// exportando entidades para CRUD
+syncDatabase();
 
 module.exports = {
     Usuario,
