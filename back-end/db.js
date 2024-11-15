@@ -7,65 +7,49 @@ const conexaoBanco = new Sequelize("PlanejamentoEstudo", "root", "", {
 });
 
 const Usuario = conexaoBanco.define("usuarios", {
-    nome: {
-        type: Sequelize.STRING,
-    },
-    email: {
-        type: Sequelize.STRING,
-        unique: true,  // Garantir que o e-mail seja único
-    },
-    senha: {
-        type: Sequelize.STRING,
-    },
-    dataNasc: {
-        type: Sequelize.DATE,
-    }
+    nome: Sequelize.STRING,
+    email: Sequelize.STRING,
+    senha: Sequelize.STRING,
+    dataNasc: Sequelize.DATE,
 });
 
 const PlanoEstudo = conexaoBanco.define("planoestudo", {
-    plano_titulo: {
-        type: Sequelize.STRING,
-    },
-    metas: {
-        type: Sequelize.STRING,
-    },
-    DataInicio: {
-        type: Sequelize.DATE,
-    },
-    DataFim: {
-        type: Sequelize.DATE,
-    }
+    plano_titulo: Sequelize.STRING,
+    metas: Sequelize.STRING,
+    DataInicio: Sequelize.DATE,
+    DataFim: Sequelize.DATE,
 });
 
 const Tarefa = conexaoBanco.define("tarefa", {
-    tarefa_titulo: {
-        type: Sequelize.STRING,
-    },
-    desc_conteudo: {
-        type: Sequelize.STRING,
-    },
-    data_vencimento: {
-        type: Sequelize.DATE,
-    },
-    horario: {
-        type: Sequelize.TIME,
-    },
-    status: {
-        type: Sequelize.STRING,
-    },
-    data_conclusao: {
-        type: Sequelize.DATE,
-    }
+    tarefa_titulo: Sequelize.STRING,
+    desc_conteudo: Sequelize.STRING,
+    data_vencimento: Sequelize.DATE,
+    horario: Sequelize.TIME,
+    status: Sequelize.STRING,
+    data_conclusao: Sequelize.DATE,
 });
 
 const Relatorio = conexaoBanco.define("relatorio", {
-    data_relatorio: {
-        type: Sequelize.DATE,
-    },
-    tempo_gasto: {
-        type: Sequelize.INTEGER,
-    }
+    data_relatorio: Sequelize.DATE,
+    tempo_gasto_minutos: Sequelize.INTEGER,
+    percentual_completo: Sequelize.FLOAT,
 });
+
+// Relacionamentos
+Usuario.hasMany(PlanoEstudo, { foreignKey: 'usuario_id' });
+PlanoEstudo.belongsTo(Usuario, { foreignKey: 'usuario_id' });
+
+PlanoEstudo.hasMany(Tarefa, { foreignKey: 'planoestudo_id' });
+Tarefa.belongsTo(PlanoEstudo, { foreignKey: 'planoestudo_id' });
+
+module.exports = {
+    Usuario,
+    PlanoEstudo,
+    Tarefa,
+    Relatorio,
+    conexaoBanco,
+};
+
 
 // Sincronizando os modelos com o banco de dados
 const syncDatabase = async () => {
