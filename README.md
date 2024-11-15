@@ -1,4 +1,4 @@
-# Site de Planejamento de Estudos
+# Back-end do Site de Planejamento de Estudos
 
 1. Clonar o Repositório
 
