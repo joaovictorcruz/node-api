@@ -1,9 +1,9 @@
-const { Usuario, PlanoEstudo, Tarefa, Relatorio } = require("../db");  // Importando diretamente de db.js
+const { Usuario, PlanoEstudo, Tarefa, Relatorio } = require("../db"); 
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const SECRET_KEY = "yourSecretKey"; // Troque por uma chave segura
+const SECRET_KEY = "admin123"; 
 
 // Função para cadastro de usuário
 const cadastrarUsuario = async (req, res) => {
