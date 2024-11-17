@@ -17,6 +17,8 @@
 ### Pacotes necessários para rodar o projeto
     npm install express
     npm install nodemon
-    npm install --save sequelize
+    npm install sequelize
+    npm install mysql2
+    npm install cors
     npm install bcrypt@5
     npm install jsonwebtoken
