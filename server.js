@@ -4,7 +4,9 @@ const rotas = express();
 const { Usuario } = require("./back-end/db")
 // Importar as rotas
 const authRoutes = require("./back-end/routes/authRoutes");
+const planosRoutes = require("./back-end/routes/planosRoutes");
 
+rotas.use("/back-end/routes", planosRoutes);
 rotas.use(cors());
 rotas.use(express.json()); // Para parsear JSON
 
