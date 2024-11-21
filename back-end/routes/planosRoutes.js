@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { PlanoEstudo } = require("/db")
+const { exibirPlanos, adicionarPlano, editarPlano, deletarPlano } = require("../controllers/planosController");
+const jwt = require("jsonwebtoken");
 
 // Middleware para autenticação
 const autenticarToken = (req, res, next) => {
@@ -16,32 +17,10 @@ const autenticarToken = (req, res, next) => {
     }
 };
 
-// Rota para buscar planos
-router.get("/", autenticarToken, async (req, res) => {
-    try {
-        const planos = await PlanoEstudo.findAll({ where: { usuario_id: req.usuarioId } });
-        res.json(planos);
-    } catch (error) {
-        res.status(500).json({ erro: "Erro ao buscar planos." });
-    }
-});
-
-// Rota para criar novo plano
-router.post("/", autenticarToken, async (req, res) => {
-    const { plano_titulo, metas, DataInicio, DataFim } = req.body;
-
-    try {
-        const novoPlano = await PlanoEstudo.create({
-            plano_titulo,
-            metas,
-            DataInicio,
-            DataFim,
-            usuario_id: req.usuarioId,
-        });
-        res.status(201).json(novoPlano);
-    } catch (error) {
-        res.status(500).json({ erro: "Erro ao criar plano." });
-    }
-});
+// Rotas de planos
+router.get("/buscarplanos", autenticarToken, exibirPlanos);       // Buscar todos os planos
+router.post("/novoplano", autenticarToken, adicionarPlano);      // Criar um novo plano
+router.put("/editarplano", autenticarToken, editarPlano);        // Editar um plano
+router.delete("/excluirplano", autenticarToken, deletarPlano);   // Excluir um plano
 
 module.exports = router;

@@ -1,22 +1,22 @@
 const express = require("express");
 const cors = require("cors");
 const rotas = express();
-const { Usuario } = require("./back-end/db")
+const { Usuario } = require("./back-end/db");
+
 // Importar as rotas
 const authRoutes = require("./back-end/routes/authRoutes");
 const planosRoutes = require("./back-end/routes/planosRoutes");
 
-rotas.use("/back-end/routes", planosRoutes);
 rotas.use(cors());
 rotas.use(express.json()); // Para parsear JSON
 
-// Definindo a rota principal
+// Registrar rotas
+rotas.use("/api/auth", authRoutes);
+rotas.use("/api/planos", planosRoutes);
+
 rotas.get("/", (req, res) => {
     res.send("API de Planejamento de Estudo");
 });
-
-// Usando as rotas
-rotas.use("/api/auth", authRoutes);
 
 rotas.get("/exibir", async function (req, res) {
     try{

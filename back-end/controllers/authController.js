@@ -18,7 +18,7 @@ const cadastrarUsuario = async (req, res) => {
 
         // Criptografar a senha
         const senhaCriptografada = await bcrypt.hash(senha, 10);
-
+       
         // Criar o usuário
         const novoUsuario = await Usuario.create({
             nome,
@@ -27,7 +27,9 @@ const cadastrarUsuario = async (req, res) => {
             dataNasc,
         });
 
-        res.status(201).json({ mensagem: "Usuário cadastrado com sucesso", usuario: novoUsuario });
+        const token = jwt.sign({ id: novoUsuario.id }, SECRET_KEY, { expiresIn: "1h" });
+
+        res.status(201).json({ mensagem: "Usuário cadastrado com sucesso", token: token, usuario: novoUsuario });
     } catch (error) {
         console.error(error);
         res.status(500).json({ erro: "Erro ao cadastrar usuário" });
