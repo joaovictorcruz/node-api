@@ -16,9 +16,8 @@ const Usuario = conexaoBanco.define("usuarios", {
 const PlanoEstudo = conexaoBanco.define("planoestudo", {
     plano_titulo: Sequelize.STRING,
     metas: Sequelize.STRING,
-    DataInicio: Sequelize.DATE,
-    DataFim: Sequelize.DATE,
 });
+
 
 const Tarefa = conexaoBanco.define("tarefa", {
     tarefa_titulo: Sequelize.STRING,
