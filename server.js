@@ -26,7 +26,7 @@ rotas.get("/exibir", async function (req, res) {
         res.status(500).json({ message: `Erro ao buscar usuarios: ${error}` });
     }
   });
-
+  
 // Iniciando o servidor
 rotas.listen(1910, () => {
     console.log("Server is running on port 1910");

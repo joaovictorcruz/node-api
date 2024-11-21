@@ -23,7 +23,6 @@ const Tarefa = conexaoBanco.define("tarefa", {
     tarefa_titulo: Sequelize.STRING,
     desc_conteudo: Sequelize.STRING,
     data_vencimento: Sequelize.DATE,
-    horario: Sequelize.TIME,
     status: Sequelize.STRING,
     data_conclusao: Sequelize.DATE,
 });
