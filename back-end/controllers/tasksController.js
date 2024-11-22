@@ -64,7 +64,7 @@ const editarTarefa = async (req, res) => {
             desc_conteudo,
             data_vencimento,
             status,
-        });
+        }); 
 
         res.status(200).json({ message: "Tarefa atualizada com sucesso!", tarefa });
     } catch (error) {
