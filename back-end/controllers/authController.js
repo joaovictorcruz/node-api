@@ -27,9 +27,7 @@ const cadastrarUsuario = async (req, res) => {
             dataNasc,
         });
 
-        const token = jwt.sign({ id: novoUsuario.id }, SECRET_KEY, { expiresIn: "1h" });
-
-        res.status(201).json({ mensagem: "Usuário cadastrado com sucesso", token: token, usuario: novoUsuario });
+        res.status(201).json({ mensagem: "Usuário cadastrado com sucesso"});
     } catch (error) {
         console.error(error);
         res.status(500).json({ erro: "Erro ao cadastrar usuário" });
