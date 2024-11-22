@@ -111,6 +111,27 @@ const excluirTarefa = async (req, res) => {
         res.status(500).json({ message: "Erro ao excluir tarefa." });
     }
 };
-;
 
-module.exports = { buscarTarefas, buscarTarefaPorId, criarTarefa, editarTarefa, excluirTarefa };
+// Finalizar uma tarefa
+const finalizarTarefa = async (req, res) => {
+    const { tarefaId } = req.body;
+
+    try {
+        const tarefa = await Tarefa.findByPk(tarefaId);
+
+        if (!tarefa) {
+            return res.status(404).json({ message: "Tarefa não encontrada." });
+        }
+
+        // Atualiza o status para "Concluída"
+        await tarefa.update({ status: "Concluída" });
+
+        res.status(200).json({ message: "Tarefa finalizada com sucesso!" });
+    } catch (error) {
+        console.error("Erro ao finalizar a tarefa:", error.message);
+        res.status(500).json({ message: "Erro ao finalizar a tarefa." });
+    }
+};
+
+
+module.exports = { buscarTarefas, buscarTarefaPorId, criarTarefa, editarTarefa, excluirTarefa, finalizarTarefa };
