@@ -63,4 +63,20 @@ const loginUsuario = async (req, res) => {
     }
 };
 
-module.exports = { cadastrarUsuario, loginUsuario };
+const autenticarToken = (req, res, next) => {
+    const token = req.headers.authorization?.split(" ")[1];
+
+    if (!token) {
+        return res.status(403).json({ message: "Acesso negado. Token não fornecido." });
+    }
+
+    try {
+        const decoded = jwt.verify(token, SECRET_KEY);
+        req.usuarioId = decoded.id;
+        next();
+    } catch (error) {
+        res.status(403).json({ message: "Token inválido ou expirado." });
+    }
+};    
+
+module.exports = {autenticarToken, cadastrarUsuario, loginUsuario };
