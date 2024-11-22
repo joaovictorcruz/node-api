@@ -48,15 +48,17 @@ const criarTarefa = async (req, res) => {
 
 // Editar uma tarefa usando req.body
 const editarTarefa = async (req, res) => {
-    const { tarefaId, tarefa_titulo, desc_conteudo, data_vencimento, status } = req.body;
-
+    const { tarefa_titulo, desc_conteudo, data_vencimento, status } = req.body; // Agora pegamos os dados de req.body
+    const { tarefaId } = req.params;
     try {
+        // Verifica se a tarefa existe
         const tarefa = await Tarefa.findByPk(tarefaId);
 
         if (!tarefa) {
             return res.status(404).json({ message: "Tarefa não encontrada." });
         }
 
+        // Atualiza a tarefa com os novos dados
         await tarefa.update({
             tarefa_titulo,
             desc_conteudo,
@@ -70,6 +72,25 @@ const editarTarefa = async (req, res) => {
         res.status(500).json({ message: "Erro ao editar tarefa." });
     }
 };
+
+// Buscar uma tarefa específica
+const buscarTarefaPorId = async (req, res) => {
+    const { tarefaId } = req.params; // Agora usamos req.params para pegar o ID da tarefa
+
+    try {
+        const tarefa = await Tarefa.findByPk(tarefaId); // Procurando a tarefa pelo ID
+
+        if (!tarefa) {
+            return res.status(404).json({ message: "Tarefa não encontrada." });
+        }
+
+        res.status(200).json(tarefa); // Retorna a tarefa encontrada
+    } catch (error) {
+        console.error("Erro ao buscar tarefa:", error.message);
+        res.status(500).json({ message: "Erro ao buscar tarefa." });
+    }
+};
+
 
 // Excluir uma tarefa
 const excluirTarefa = async (req, res) => {
@@ -92,6 +113,4 @@ const excluirTarefa = async (req, res) => {
 };
 ;
 
-
-
-module.exports = { buscarTarefas, criarTarefa, editarTarefa, excluirTarefa };
+module.exports = { buscarTarefas, buscarTarefaPorId, criarTarefa, editarTarefa, excluirTarefa };
